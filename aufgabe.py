@@ -25,11 +25,36 @@ def berechne_durchschnittliche_dichte(proben):
     return np.mean(dichten)
 
 
+def bubble_sort(proben):
+    n = len(proben)
+    vertauschungen = 0
+    for i in range(n):
+        getauscht = False
+        for j in range(0, n - i - 1):
+            if proben[j][2] > proben[j + 1][2]:
+                proben[j], proben[j + 1] = proben[j + 1], proben[j]
+                vertauschungen += 1
+                getauscht = True
+        if not getauscht:
+            break
+    return proben, vertauschungen
+
+
+def gebe_sortierte_proben_aus(proben):
+    print("\nSortierte Proben (aufsteigend nach Dichte):")
+    for position, probe in enumerate(proben, start=1):
+        print(f"{position}. {probe[1]} – Dichte: {probe[2]} g/cm³, Tiefe: {probe[3]} m")
+
+
 def main():
     print("Willkommen zum Dichteanalyse-Programm!")
     proben = initialisiere_proben()
     durchschnitt = berechne_durchschnittliche_dichte(proben)
     print(f"Durchschnittliche Dichte aller Proben: {durchschnitt:.2f} g/cm³")
+
+    sortierte_proben, anzahl_tausche = bubble_sort(proben)
+    gebe_sortierte_proben_aus(sortierte_proben)
+    print(f"\nAnzahl der Vertauschungen: {anzahl_tausche}")
 
 
 if __name__ == "__main__":
