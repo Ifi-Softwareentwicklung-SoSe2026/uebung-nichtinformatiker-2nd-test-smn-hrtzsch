@@ -1,6 +1,7 @@
 import matplotlib
 matplotlib.use('Agg')
 
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -46,6 +47,19 @@ def gebe_sortierte_proben_aus(proben):
         print(f"{position}. {probe[1]} – Dichte: {probe[2]} g/cm³, Tiefe: {probe[3]} m")
 
 
+def visualisiere_dichteverteilung(proben):
+    proben_namen = [p[1] for p in proben]
+    dichten = [p[2] for p in proben]
+    plt.bar(proben_namen, dichten)
+    plt.title("Dichteverteilung der Bohrkernproben")
+    plt.xlabel("Probenname")
+    plt.ylabel("Dichte (g/cm³)")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig("dichteverteilung.png")
+    print("Visualisierung gespeichert: dichteverteilung.png")
+
+
 def main():
     print("Willkommen zum Dichteanalyse-Programm!")
     proben = initialisiere_proben()
@@ -55,6 +69,8 @@ def main():
     sortierte_proben, anzahl_tausche = bubble_sort(proben)
     gebe_sortierte_proben_aus(sortierte_proben)
     print(f"\nAnzahl der Vertauschungen: {anzahl_tausche}")
+
+    visualisiere_dichteverteilung(sortierte_proben)
 
 
 if __name__ == "__main__":
