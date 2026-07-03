@@ -60,6 +60,26 @@ def visualisiere_dichteverteilung(proben):
     print("Visualisierung gespeichert: dichteverteilung.png")
 
 
+def suche_proben_nach_dichte(proben):
+    dichte_zu_name = {}
+    for p in proben:
+        dichte = p[2]
+        if dichte not in dichte_zu_name:
+            dichte_zu_name[dichte] = []
+        dichte_zu_name[dichte].append(p[1])
+    eingabe = input("Gib eine Dichte in g/cm³ ein: ")
+    try:
+        gesuchte_dichte = float(eingabe)
+    except ValueError:
+        print(f"Ungültige Eingabe: '{eingabe}' ist keine Zahl.")
+        return
+    if gesuchte_dichte in dichte_zu_name:
+        namen = dichte_zu_name[gesuchte_dichte]
+        print(f"Proben mit Dichte {gesuchte_dichte} g/cm³: {', '.join(namen)}")
+    else:
+        print(f"Keine Probe mit Dichte {gesuchte_dichte} g/cm³ gefunden.")
+
+
 def main():
     print("Willkommen zum Dichteanalyse-Programm!")
     proben = initialisiere_proben()
@@ -71,6 +91,8 @@ def main():
     print(f"\nAnzahl der Vertauschungen: {anzahl_tausche}")
 
     visualisiere_dichteverteilung(sortierte_proben)
+
+    suche_proben_nach_dichte(sortierte_proben)
 
 
 if __name__ == "__main__":
