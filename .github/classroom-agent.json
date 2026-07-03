@@ -1,0 +1,16 @@
+{
+  "agent_workflow": {
+    "exercise": "uebung-nichtinformatiker-python",
+    "workflow": "assignment-sequence",
+    "assignment_file": "task.md",
+    "assignment_parts": 4,
+    "review_workflow": ".github/workflows/python-run.yml",
+    "required_checks": [
+      "workflow:.github/workflows/python-run.yml"
+    ],
+    "solution_files": [
+      "aufgabe.py"
+    ],
+    "ci_artifact": "python-run-logs"
+  }
+}
